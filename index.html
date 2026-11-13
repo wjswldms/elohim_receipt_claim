@@ -1,5 +1,14 @@
-<title>청년부 청구함</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFFAF5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="영수증 청구함">
+<meta name="format-detection" content="telephone=no">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{-webkit-text-size-adjust:100%;text-size-adjust:100%}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>엘로힘 영수증 청구함</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap">
@@ -44,7 +53,7 @@ button{cursor:pointer}
 .who b{color:var(--fg)}
 .linkbtn{border:1px solid var(--line);background:var(--surface);border-radius:var(--r-ctl);padding:5px 10px;font-size:13px;color:var(--fg2)}
 .deadline{background:var(--surface);border-radius:var(--r-card);border-left:5px solid var(--accent);padding:14px 16px;display:flex;align-items:center;gap:14px;margin-bottom:14px}
-.deadline .dd{font-weight:800;color:var(--accent-ink);font-size:24px;min-width:54px;letter-spacing:-.02em}
+.deadline .dd{font-weight:800;color:var(--accent-ink);font-size:24px;min-width:54px;letter-spacing:-.02em;white-space:nowrap}
 .deadline .t1{font-weight:700;font-size:15px}
 .deadline .t2{color:var(--fg2);font-size:13.5px;line-height:1.5}
 
@@ -249,6 +258,59 @@ details.faq p{margin:0 0 16px 22px;color:var(--fg2);font-size:14.5px}
 .tabbar a[aria-current="page"]{color:var(--fg);font-weight:800;border-top-color:var(--accent)}
 .tabbar a[aria-current="page"] svg{color:var(--accent-ink)}
 
+/* 회계 모드 */
+.tabbar .in.five{grid-template-columns:repeat(5,1fr)}
+.adm-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.adm-head .linkbtn{margin-top:14px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.kpi{background:var(--surface);border-radius:var(--r-card);padding:14px 14px 12px;border:1.5px solid transparent;text-align:left}
+.kpi[aria-pressed="true"]{border-color:var(--accent)}
+.kpi .k{font-size:13px;color:var(--fg3);font-weight:500}
+.kpi .v{font-size:21px;font-weight:800;letter-spacing:-.02em;margin-top:2px}
+.kpi .s{font-size:13px;color:var(--fg2)}
+.kpi.alert .v{color:var(--accent-ink)}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);border-radius:var(--r-card);padding:4px;gap:4px;margin-bottom:12px}
+.seg button{border:0;background:none;border-radius:var(--r-ctl);padding:9px 0;font-weight:500;color:var(--fg2);font-size:14px}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent-ink);font-weight:800}
+.acard{background:var(--surface);border-radius:var(--r-card);padding:16px 18px;margin-bottom:8px}
+.acard .h{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.acard .who{font-weight:800;font-size:16.5px}
+.acard .sub2{color:var(--fg3);font-size:13.5px;margin-top:1px}
+.acard .amt{font-weight:800;font-size:20px;white-space:nowrap;text-align:right}
+.acard .amt small{display:block;font-size:12px;font-weight:500;color:var(--fg3)}
+.acard .place{font-size:14.5px;margin-top:8px;color:var(--fg2)}
+.flags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.flag{font-size:12.5px;font-weight:700;border-radius:var(--r-sm);padding:2px 7px;background:var(--surface2);color:var(--fg2);border:1px solid var(--line)}
+.flag.w{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.flag.b{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.strip{display:flex;gap:6px;overflow-x:auto;margin-top:10px;padding-bottom:2px}
+.ph{flex:none;width:76px;height:100px;border-radius:var(--r-sm);background:var(--surface2);border:1px solid var(--line);position:relative;overflow:hidden;padding:0}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph span{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);color:#fff;font-size:11px;padding:2px 0;text-align:center}
+.ph.loading::after{content:"불러오는 중";position:absolute;inset:0;display:grid;place-items:center;font-size:11px;color:var(--fg3)}
+.abtns{display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-top:12px}
+.abtns .btn{padding:12px;font-size:15.5px}
+.paycard .bankline{display:flex;align-items:center;gap:8px;margin-top:10px;background:var(--surface2);border:1px solid var(--line);border-radius:var(--r-ctl);padding:10px 12px}
+.paycard .bankline b{font-size:13.5px;color:var(--fg2);font-weight:700;white-space:nowrap}
+.paycard .bankline span{font-size:16px;font-weight:800;letter-spacing:.02em;flex:1;min-width:0;overflow-wrap:anywhere}
+.copyrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.copyrow .btn{font-size:14.5px;padding:11px}
+.claimlist{margin-top:10px;border-top:1px dashed var(--line);padding-top:8px;font-size:13.5px;color:var(--fg2);display:grid;gap:3px}
+.claimlist div{display:flex;justify-content:space-between;gap:8px}
+.hist-day{display:flex;justify-content:space-between;font-weight:800;font-size:14px;margin:16px 2px 8px;color:var(--fg2)}
+.hrow{background:var(--surface);border-radius:var(--r-ctl);padding:12px 14px;margin-bottom:6px;display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:14.5px}
+.hrow .m{color:var(--fg3);font-size:12.5px}
+.viewer{position:fixed;inset:0;background:#000;z-index:40;display:flex;flex-direction:column}
+.viewer .vtop{display:flex;justify-content:space-between;align-items:center;color:#fff;padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;font-size:14px}
+.viewer .vtop button{background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:var(--r-ctl);padding:7px 12px;font-size:14px}
+.viewer .vimg{flex:1;display:grid;place-items:center;overflow:auto;touch-action:pan-y pinch-zoom}
+.viewer img{max-width:100%;max-height:100%;object-fit:contain}
+.viewer .vnav{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 16px calc(14px + env(safe-area-inset-bottom,0px))}
+.viewer .vnav button{background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:var(--r-ctl);padding:12px;font-size:15px;font-weight:700}
+.reasons{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px;text-align:left}
+.sheet textarea{width:100%;min-height:84px;resize:vertical;text-align:left}
+.viewonly{font-size:13px;color:var(--fg3);margin-top:10px}
+
 /* sheet, toast */
 .sheet-bg{position:fixed;inset:0;background:rgba(30,15,5,.45);z-index:20;display:grid;align-items:end;justify-items:center}
 .sheet{background:var(--surface);width:100%;max-width:520px;border-radius:12px 12px 0 0;padding:28px 22px calc(22px + env(safe-area-inset-bottom,0px));text-align:center}
@@ -264,12 +326,15 @@ details.faq p{margin:0 0 16px 22px;color:var(--fg2);font-size:14.5px}
 .credit{position:fixed;right:calc(10px + env(safe-area-inset-right,0px));bottom:calc(76px + env(safe-area-inset-bottom,0px));font-size:10px;color:var(--fg3);opacity:.55;z-index:7;pointer-events:none;letter-spacing:.04em}
 .app.gated~.credit{bottom:calc(10px + env(safe-area-inset-bottom,0px))}
 @media (prefers-reduced-motion:no-preference){.sheet{animation:up .25s ease-out}@keyframes up{from{transform:translateY(40px);opacity:.6}}}
-@media (max-width:380px){.sched{grid-template-columns:1fr}.rules li{grid-template-columns:1fr;gap:2px}.review .rv{grid-template-columns:70px 1fr auto}}
+.brand{font-size:17px}@media (max-width:380px){.brand{font-size:15.5px}.sched{grid-template-columns:1fr}.rules li{grid-template-columns:1fr;gap:2px}.review .rv{grid-template-columns:70px 1fr auto}}
 </style>
+</head>
+<body>
+
 
 <div class="app gated" id="app">
   <header class="top">
-    <div class="brand">청년부 청구함</div>
+    <div class="brand">엘로힘 영수증 청구함</div>
     <span class="tag" id="demoTag" hidden>시안</span>
     <span class="sp"></span>
     <div class="who" id="whoBox" hidden><span><b id="whoName"></b> 님</span><button class="linkbtn" id="logout" type="button">나가기</button></div>
@@ -279,7 +344,7 @@ details.faq p{margin:0 0 16px 22px;color:var(--fg2);font-size:14.5px}
   <section class="gate" id="gate">
     <div id="gateA">
       <div class="progress"><i class="on"></i><i></i></div>
-      <h1>청년부 청구함</h1>
+      <h1>엘로힘 영수증 청구함</h1>
       <p class="lead">리더 단톡방에 공지된 공동체 암호를 입력하세요.</p>
       <div class="card">
         <div class="field"><label for="gPass">공동체 암호</label><input id="gPass" class="ctl" type="password" autocomplete="off" placeholder="암호 입력"></div>
@@ -307,7 +372,7 @@ details.faq p{margin:0 0 16px 22px;color:var(--fg2);font-size:14.5px}
         </div>
       </div>
     </div>
-    <div class="demo" id="demoBox" hidden><b>시안 체험</b> · 공동체 암호 <b>1234</b><br>장도현(팀장) PIN <b>0000</b> · 박서윤(셀리더+또래장) PIN <b>1111</b><br>그 외 이름은 처음 입장이라 PIN을 새로 정해요.</div>
+    <div class="demo" id="demoBox" hidden><b>시안 체험</b> · 공동체 암호 <b>1234</b><br>리더: 장도현(팀장) PIN <b>0000</b> · 박서윤(셀리더+또래장) PIN <b>1111</b><br>회계 모드: 서다은(회계) PIN <b>7777</b> · 신지호(보기 전용) PIN <b>8888</b><br>그 외 이름은 처음 입장이라 PIN을 새로 정해요.</div>
   </section>
 
   <div id="main" hidden>
@@ -452,15 +517,26 @@ details.faq p{margin:0 0 16px 22px;color:var(--fg2);font-size:14.5px}
       <div id="faqList"></div>
     </div>
   </section>
+
+  <!-- 정산 (회계 모드) -->
+  <section id="v-admin" data-view hidden>
+    <div class="adm-head"><h1 class="page">정산</h1><button class="linkbtn" type="button" id="admRefresh">새로고침</button></div>
+    <p class="lead" id="admLead"></p>
+    <div class="kpis" id="admKpis"></div>
+    <div class="seg" id="admSeg" role="tablist"></div>
+    <div id="admList"></div>
+  </section>
   </div>
 </div>
 
-<nav class="tabbar" id="tabbar" aria-label="메뉴" hidden><div class="in">
+<nav class="tabbar" id="tabbar" aria-label="메뉴" hidden><div class="in" id="tabIn">
   <a href="#claim" data-tab="claim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>청구하기</a>
   <a href="#mine" data-tab="mine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12l3 3 5-6"/></svg>내 청구</a>
   <a href="#budget" data-tab="budget"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>우리 예산</a>
   <a href="#rules" data-tab="rules"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 4h11l5 5v11H4z"/><path d="M8 13h8M8 17h5"/></svg>규정·FAQ</a>
+  <a href="#admin" data-tab="admin" id="tabAdmin" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg>정산</a>
 </div></nav>
+<div id="viewerRoot"></div>
 <div class="credit">© JINI</div>
 <div id="sheetRoot"></div>
 <div id="toastRoot"></div>
@@ -532,8 +608,8 @@ function renderDeadline(){
   DL = new Date(NOW.getFullYear(), NOW.getMonth(), NOW.getDate()+add, hour, 0, 0);
   if (DL <= NOW) DL.setDate(DL.getDate()+7);
   PAY_END = new Date(DL.getFullYear(), DL.getMonth(), DL.getDate()+2);
-  const ms = DL - NOW, days = Math.floor(ms/864e5), hrs = Math.floor(ms%864e5/36e5);
-  $('#dday').textContent = days > 0 ? 'D-'+days : hrs+'시간';
+  const days = Math.round((new Date(DL.getFullYear(), DL.getMonth(), DL.getDate()) - new Date(NOW.getFullYear(), NOW.getMonth(), NOW.getDate())) / 864e5);
+  $('#dday').textContent = days > 0 ? 'D-'+days : '오늘';
   $('#dlText').textContent = `이번 정산 마감 ${md(DL)} ${hour}:00`;
   $('#payText').textContent = `마감 전 청구분은 ${md(DL)}~${md(PAY_END)} 입금, 마감 후 청구는 다음 주에 입금돼요.`;
 }
@@ -588,7 +664,7 @@ $('#gSearch').addEventListener('input', renderNameList);
 $('#gList').addEventListener('click', e => { const b = e.target.closest('[data-name]'); if (b) pickName(b.dataset.name); });
 async function loadNames(pass){
   const r = await api('names', { pass });
-  NAMES = r.names;
+  NAMES = r.names; store.set('names', NAMES);
 }
 $('#gNextA').addEventListener('click', e => busy(e.target, '확인 중…', async () => {
   const pass = $('#gPass').value;
@@ -610,7 +686,7 @@ $('#gNextB').addEventListener('click', e => {
     try {
       const r = await api('login', { pass: store.get('pass'), name: gSel.name, pin });
       if ($('#gKeep').checked) store.set('token', r.token); else { store.del('token'); store.sset('token', r.token); }
-      gSel.hasPin = true;
+      gSel.hasPin = true; store.set('names', NAMES);
       enter(r.state);
     } catch(x) {
       if (x.code==='LOCKED') { $('#gErrB').innerHTML=''; return renderPinBox(true); }
@@ -620,8 +696,12 @@ $('#gNextB').addEventListener('click', e => {
     }
   });
 });
+/* 마지막 화면 데이터를 이 휴대폰에 기억해 두고, 다음에 열 때 먼저 보여준 뒤 서버 값으로 갱신 */
+function saveState(){ if (S && store.get('token')) store.set('state', S); }
 function enter(state){
-  S = state;
+  S = state; saveState();
+  const isAdmin = !!S.me.role;
+  $('#tabAdmin').hidden = !isAdmin; $('#tabIn').classList.toggle('five', isAdmin); AD = null;
   $('#gate').hidden = true; $('#main').hidden = false; $('#tabbar').hidden = false; $('#app').classList.remove('gated');
   $('#whoBox').hidden = false; $('#whoName').textContent = S.me.name;
   $('#holder').value = S.me.name;
@@ -637,7 +717,7 @@ function enter(state){
   if (!store.get('seen.'+S.me.name)) showWelcome();
 }
 $('#logout').addEventListener('click', async () => {
-  const t = getToken(); store.del('token'); S = null;
+  const t = getToken(); store.del('token'); store.del('state'); S = null; AD = null;
   api('logout', { token: t }).catch(() => {});
   $('#main').hidden = true; $('#tabbar').hidden = true; $('#whoBox').hidden = true; $('#app').classList.add('gated');
   $('#gate').hidden = false;
@@ -646,7 +726,7 @@ $('#logout').addEventListener('click', async () => {
 });
 /* 세션이 끝났으면 입장 화면으로 */
 function handleAuthError(x){
-  if (x.code==='AUTH') { store.del('token'); toast('다시 로그인해주세요.'); setTimeout(() => location.reload(), 900); return true; }
+  if (x.code==='AUTH') { store.del('token'); store.del('state'); toast('다시 로그인해주세요.'); setTimeout(() => location.reload(), 900); return true; }
   return false;
 }
 
@@ -853,15 +933,15 @@ function renderReview(){
 }
 $('#review').addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) goStep(+b.dataset.go); });
 
-/* 사진: 업로드 전에 긴 변 1600px, JPEG로 압축 */
+/* 사진: 업로드 전에 긴 변 1400px, JPEG로 압축 (글자는 선명하게, 전송은 가볍게) */
 async function compress(file){
   try {
     const bmp = await createImageBitmap(file);
-    const k = Math.min(1, 1600/Math.max(bmp.width, bmp.height));
+    const k = Math.min(1, 1400/Math.max(bmp.width, bmp.height));
     const cv = document.createElement('canvas');
     cv.width = Math.round(bmp.width*k); cv.height = Math.round(bmp.height*k);
     cv.getContext('2d').drawImage(bmp, 0, 0, cv.width, cv.height);
-    const blob = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.82));
+    const blob = await new Promise(r => cv.toBlob(r, 'image/jpeg', 0.78));
     return blob && blob.size < file.size ? blob : file;
   } catch(e) { return file; }
 }
@@ -892,7 +972,7 @@ $('#acct').addEventListener('input', e => e.target.value = e.target.value.replac
 
 async function submit(btn){
   const c = compute();
-  await busy(btn, '보내는 중…', async () => {
+  await busy(btn, '사진 보내는 중…', async () => {
     try {
       const receipts = await Promise.all(f.receipts.map(p => blobToDataUrl(p.blob)));
       const group = f.group ? await blobToDataUrl(f.group.blob) : null;
@@ -903,7 +983,7 @@ async function submit(btn){
         receipts, group, bank: $('#bank').value, acct: $('#acct').value.replace(/\D/g,'')
       });
       if ($('#remember').checked) store.set('acct.'+S.me.name, { bank: $('#bank').value, acct: $('#acct').value });
-      S = r.state; renderBadges();
+      S = r.state; saveState(); renderBadges();
       showDone({ no: r.no, unit: f.unit, item: f.item, amount: r.amount, paid: c.paid });
     } catch(x) {
       if (!handleAuthError(x)) showStepErr([x.message]);
@@ -989,7 +1069,7 @@ $('#mineList').addEventListener('click', async e => {
   if (t.dataset.cancel) { confirmNo = t.dataset.cancel; return renderMine(); }
   if ('cancelNo' in t.dataset) { confirmNo = null; return renderMine(); }
   if (t.dataset.cancelYes) busy(t, '취소 중…', async () => {
-    try { const r = await api('cancel', { token: getToken(), no: t.dataset.cancelYes }); S = r.state; confirmNo = null; renderMine(); renderBadges(); toast('청구를 취소했어요.'); }
+    try { const r = await api('cancel', { token: getToken(), no: t.dataset.cancelYes }); S = r.state; saveState(); confirmNo = null; renderMine(); renderBadges(); toast('청구를 취소했어요.'); }
     catch(x) { if (!handleAuthError(x)) { confirmNo = null; renderMine(); toast(x.message); } }
   });
 });
@@ -1053,16 +1133,158 @@ function renderFaq(){
 }
 $('#faqSearch').addEventListener('input', renderFaq);
 
+/* ===== 정산 (회계 모드) ===== */
+let AD = null, admTab = 'check', admConfirm = null;
+const PHOTOS = {};
+const REASONS = ['배경이 보여요. ‘문서 스캔’으로 다시 올려주세요.','카드 매출전표만 인정돼요.','단체사진 속 인원과 입력한 인원이 달라요.','영수증 금액과 입력 금액이 달라요.','개인 결제가 섞여 있어요.','회장단 사전 보고 금액을 확인해주세요.','예산 용도에 맞지 않는 지출이에요.'];
+async function loadAdmin(){
+  if (!AD) { $('#admList').innerHTML = '<div class="card empty">불러오는 중…</div>'; $('#admKpis').innerHTML=''; $('#admSeg').innerHTML=''; }
+  else renderAdmin();
+  try { const r = await api('admin', { token: getToken() }); AD = r.admin; renderAdmin(); }
+  catch(x) { if (!handleAuthError(x)) $('#admList').innerHTML = `<div class="errbox">${esc(x.message)}</div>`; }
+}
+$('#admRefresh').addEventListener('click', e => busy(e.target, '불러오는 중', loadAdmin));
+function renderAdmin(){
+  if (!AD) return;
+  const S2 = AD.summary;
+  $('#admLead').textContent = (AD.isPay ? '회계 · 확인과 송금을 처리할 수 있어요' : '보기 전용 · 처리는 회계가 해요') + ` · 마감 ${md(DL)} ${S.deadline.hour}시`;
+  const k = (id, label, v, sub, alert) => `<button type="button" class="kpi ${alert?'alert':''}" data-at="${id}" aria-pressed="${admTab===id}"><div class="k">${label}</div><div class="v num">${v}</div><div class="s num">${sub}</div></button>`;
+  $('#admKpis').innerHTML = k('check','확인 대기', S2.check.n+'건', won(S2.check.sum), S2.check.n>0) + k('pay','송금 대기', S2.pay.n+'명', won(S2.pay.sum), S2.pay.n>0)
+    + k('held','보류 중', S2.held+'건', '리더가 고치는 중') + k('history','이번 달 청구', won(S2.month), '사용일 기준');
+  const tabs = [['check','확인',S2.check.n],['pay','송금',S2.pay.n],['held','보류',S2.held],['history','지난 내역','']];
+  $('#admSeg').innerHTML = tabs.map(([id,l,n]) => `<button type="button" role="tab" data-at="${id}" aria-pressed="${admTab===id}">${l}${n!==''?` ${n}`:''}</button>`).join('');
+  const L = $('#admList');
+  if (admTab==='check') L.innerHTML = AD.toCheck.length ? AD.toCheck.map(checkCard).join('') : emptyCard('확인할 청구가 없어요.');
+  if (admTab==='pay') L.innerHTML = AD.toPay.length ? AD.toPay.map(payCard).join('') : emptyCard('송금할 사람이 없어요. 확인 탭에서 청구를 확인하면 여기로 와요.');
+  if (admTab==='held') L.innerHTML = AD.held.length ? AD.held.map(heldCard).join('') : emptyCard('보류 중인 청구가 없어요.');
+  if (admTab==='history') L.innerHTML = historyList();
+  loadThumbs();
+}
+const emptyCard = t => `<div class="card empty" style="text-align:center;padding:28px 20px">${t}</div>`;
+function flagsOf(c){
+  const F = [];
+  if (c.fixOf) F.push(`<span class="flag">재청구 (${esc(c.fixOf)})</span>`);
+  if (c.own) F.push(`<span class="flag w">개인부담 ${won(c.own)}</span>`);
+  if (c.heads) F.push(`<span class="flag">인원 ${c.heads}명</span>`);
+  if (c.submittedYmd && c.date) { const d = Math.round((parse(c.submittedYmd) - parse(c.date))/864e5); if (d > 14) F.push(`<span class="flag w">사용 후 ${d}일 지나 청구</span>`); }
+  if (c.lines && c.lines.length > 1) F.push(`<span class="flag">${c.lines.length}곳 나눠 결제</span>`);
+  return F.length ? `<div class="flags">${F.join('')}</div>` : '';
+}
+function strip(c){
+  const ph = [...c.receipts.map((id,k) => [id, `영수증 ${k+1}`]), ...c.group.map(id => [id, '단체사진'])];
+  if (!ph.length) return '';
+  return `<div class="strip">${ph.map(([id,l],k) => `<button type="button" class="ph loading" data-ph="${esc(id)}" data-no="${esc(c.no)}" data-k="${k}" aria-label="${l} 크게 보기"><span>${l}</span></button>`).join('')}</div>`;
+}
+const placeOf = c => c.lines && c.lines.length > 1 ? c.lines.map(l => `${esc(l.place)} ${won(l.amount)}`).join(' · ') : esc(c.place);
+function checkCard(c){
+  return `<div class="acard"><div class="h"><div><div class="who">${esc(c.name)} · ${esc(c.item)}</div><div class="sub2">${esc(c.unit)} · 사용 ${md(parse(c.date))} · 제출 ${esc(c.submitted)}</div></div>
+    <div class="amt num">${won(c.amount)}${c.own?`<small>결제 ${won(c.paid)}</small>`:''}</div></div>
+    <div class="place">${placeOf(c)}${c.memo?` · ${esc(c.memo)}`:''}</div>${flagsOf(c)}${strip(c)}
+    ${AD.isPay ? `<div class="abtns"><button class="btn ghost" type="button" data-hold="${esc(c.no)}">보류</button><button class="btn" type="button" data-ok="${esc(c.no)}">확인</button></div>` : ''}</div>`;
+}
+function payCard(g){
+  const confirm = admConfirm===g.name;
+  return `<div class="acard paycard"><div class="h"><div><div class="who">${esc(g.name)}</div><div class="sub2">${g.nos.length}건</div></div><div class="amt num">${won(g.total)}</div></div>
+    ${AD.isPay ? (g.acct ? `<div class="bankline"><b>${esc(g.bank)}</b><span class="num">${esc(g.acct)}</span></div>
+      <div class="copyrow"><button class="btn ghost" type="button" data-copy="${esc(g.bank)} ${esc(g.acct)}" data-copymsg="계좌를 복사했어요">계좌 복사</button><button class="btn ghost" type="button" data-copy="${g.total}" data-copymsg="금액을 복사했어요">금액 복사</button></div>`
+      : `<div class="msg warn">계좌 정보를 찾지 못했어요. 계좌 파일을 확인해주세요.</div>`) : `<p class="viewonly">계좌는 회계만 볼 수 있어요.</p>`}
+    <div class="claimlist">${g.claims.map(c => `<div><span>${esc(c.item)} · ${md(parse(c.date))}</span><span class="num">${won(c.amount)}</span></div>`).join('')}</div>
+    ${AD.isPay ? (confirm ? `<div class="confirm"><span>${esc(g.name)} 님께 ${won(g.total)} 송금을 마쳤나요?</span><button class="btn sm ghost" type="button" data-paycancel>아니요</button><button class="btn sm" type="button" data-paid="${esc(g.name)}">입금 완료</button></div>`
+      : `<button class="btn" type="button" style="margin-top:12px" data-payask="${esc(g.name)}">송금했어요</button>`) : ''}</div>`;
+}
+function heldCard(c){
+  return `<div class="acard"><div class="h"><div><div class="who">${esc(c.name)} · ${esc(c.item)}</div><div class="sub2">${esc(c.unit)} · 사용 ${md(parse(c.date))}</div></div><div class="amt num">${won(c.amount)}</div></div>
+    <div class="reason"><b>보류 사유</b><br>${esc(c.reason||'')}</div><div class="sub2" style="margin-top:6px">${esc(c.by)} · ${esc(c.at)} · 리더가 고쳐서 다시 청구하면 확인 탭에 새로 올라와요.</div>${strip(c)}
+    ${AD.isPay ? `<div class="actions"><button class="linkbtn" type="button" data-unhold="${esc(c.no)}">보류 풀고 다시 확인하기</button></div>` : ''}</div>`;
+}
+function historyList(){
+  if (!AD.history.length) return emptyCard('최근 45일 동안 입금한 내역이 없어요.');
+  const days = {};
+  AD.history.forEach(c => (days[c.payDate] = days[c.payDate] || []).push(c));
+  return Object.keys(days).sort().reverse().map(d => `<div class="hist-day num"><span>${md(parse(d))} 입금</span><span>${won(days[d].reduce((s,c)=>s+c.amount,0))}</span></div>` +
+    days[d].map(c => `<div class="hrow"><div><b>${esc(c.name)}</b> · ${esc(c.item)}<div class="m">${esc(c.no)} · ${esc(c.by)}</div></div><div style="text-align:right"><b class="num">${won(c.amount)}</b>
+      ${AD.isPay && d===AD.today ? `<div><button class="linkbtn" type="button" style="margin-top:4px" data-undo="${esc(c.no)}">되돌리기</button></div>` : ''}</div></div>`).join('')).join('');
+}
+/* 사진은 화면에 보이는 것만 불러오고, 한 번 불러온 건 기억 */
+async function photoUrl(id){
+  if (!PHOTOS[id]) PHOTOS[id] = api('photo', { token: getToken(), id }).then(r => r.data);
+  return PHOTOS[id];
+}
+function loadThumbs(){
+  $$('#admList .ph.loading').forEach(async b => {
+    try { const u = await photoUrl(b.dataset.ph); b.classList.remove('loading'); b.insertAdjacentHTML('afterbegin', `<img src="${u}" alt="">`); }
+    catch(e) { b.classList.remove('loading'); }
+  });
+}
+function allCards(){ return [...AD.toCheck, ...AD.held, ...AD.history, ...AD.toPay.flatMap(g => g.claims)]; }
+async function openViewer(no, k){
+  const c = allCards().find(x => x.no===no); if (!c) return;
+  const list = [...c.receipts.map((id,i) => [id, `영수증 ${i+1}`]), ...c.group.map(id => [id, '단체사진'])];
+  let i = k;
+  const show = async () => {
+    const [id, label] = list[i];
+    $('#viewerRoot').innerHTML = `<div class="viewer" role="dialog" aria-modal="true" aria-label="사진 보기"><div class="vtop"><span>${esc(c.name)} · ${label} (${i+1}/${list.length}) · ${won(c.paid)}</span><button type="button" id="vClose">닫기</button></div>
+      <div class="vimg"><span style="color:#aaa">불러오는 중…</span></div>${list.length>1?`<div class="vnav"><button type="button" id="vPrev">이전</button><button type="button" id="vNext">다음</button></div>`:''}</div>`;
+    $('#vClose').onclick = () => $('#viewerRoot').innerHTML = '';
+    if ($('#vPrev')) { $('#vPrev').onclick = () => { i = (i - 1 + list.length) % list.length; show(); }; $('#vNext').onclick = () => { i = (i + 1) % list.length; show(); }; }
+    try { const u = await photoUrl(id); const box = $('#viewerRoot .vimg'); if (box) box.innerHTML = `<img src="${u}" alt="${label}">`; } catch(e) { toast('사진을 불러오지 못했어요.'); }
+  };
+  show();
+}
+function holdSheet(no){
+  const c = AD.toCheck.find(x => x.no===no); if (!c) return;
+  $('#sheetRoot').innerHTML = `<div class="sheet-bg" id="sheetBg"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="hT" style="text-align:left">
+    <h3 id="hT">${esc(c.name)} 님 청구를 보류해요</h3><p>리더가 ‘내 청구’에서 이 사유를 보고 고쳐서 다시 청구해요.</p>
+    <div class="reasons">${REASONS.map((r,k) => `<button type="button" class="chip" data-r="${k}">${esc(r.split('.')[0])}</button>`).join('')}</div>
+    <textarea class="ctl" id="hReason" placeholder="사유를 고르거나 직접 적어주세요"></textarea>
+    <div class="btns" style="margin-top:12px"><button class="btn ghost" type="button" id="hCancel">취소</button><button class="btn" type="button" id="hGo">보류하기</button></div></div></div>`;
+  $$('.reasons .chip').forEach(b => b.onclick = () => { $$('.reasons .chip').forEach(x => x.setAttribute('aria-pressed', x===b)); $('#hReason').value = REASONS[+b.dataset.r]; });
+  $('#hCancel').onclick = () => $('#sheetRoot').innerHTML = '';
+  $('#sheetBg').onclick = e => { if (e.target.id==='sheetBg') $('#sheetRoot').innerHTML = ''; };
+  $('#hGo').onclick = e => {
+    const reason = $('#hReason').value.trim(); if (!reason) return toast('보류 사유를 적어주세요.');
+    adminAct(e.target, '보류 중…', 'setStatus', { no, status:'보류', expect:'접수', reason }, '보류했어요.').then(ok => { if (ok) $('#sheetRoot').innerHTML = ''; });
+  };
+}
+async function adminAct(btn, label, action, payload, msg){
+  return busy(btn, label, async () => {
+    try { const r = await api(action, { token: getToken(), ...payload }); AD = r.admin; admConfirm = null; renderAdmin(); toast(msg); return true; }
+    catch(x) { if (handleAuthError(x)) return false; toast(x.message); if (x.code==='STALE') loadAdmin(); return false; }
+  });
+}
+document.addEventListener('click', async e => {
+  if (!$('#v-admin') || $('#v-admin').hidden) return;
+  const t = e.target.closest('button'); if (!t) return;
+  const d = t.dataset;
+  if (d.at) { admTab = d.at; admConfirm = null; renderAdmin(); return; }
+  if (d.ph) return openViewer(d.no, +d.k);
+  if (d.ok) return adminAct(t, '확인 중…', 'setStatus', { no:d.ok, status:'확인', expect:'접수' }, '확인했어요. 송금 탭으로 옮겼어요.');
+  if (d.hold) return holdSheet(d.hold);
+  if (d.unhold) return adminAct(t, '처리 중…', 'setStatus', { no:d.unhold, status:'접수', expect:'보류' }, '확인 탭으로 되돌렸어요.');
+  if (d.copy) {
+    try { await navigator.clipboard.writeText(d.copy); toast(d.copymsg); }
+    catch(x) { toast('복사가 안 돼요. 길게 눌러 직접 복사해주세요: ' + d.copy); }
+    return;
+  }
+  if (d.payask) { admConfirm = d.payask; renderAdmin(); return; }
+  if ('paycancel' in d) { admConfirm = null; renderAdmin(); return; }
+  if (d.paid) { const g = AD.toPay.find(x => x.name===d.paid); return adminAct(t, '처리 중…', 'paid', { name:g.name, nos:g.nos }, `${g.name} 님 입금 완료로 바꿨어요.`); }
+  if (d.undo) return adminAct(t, '되돌리는 중', 'undoPaid', { nos:[d.undo] }, '송금 탭으로 되돌렸어요.');
+});
+
 /* ===== 탭 ===== */
-const VIEWS = ['claim','mine','budget','rules'];
+const VIEWS = ['claim','mine','budget','rules','admin'];
 function route(){
   if (!S) return;
-  const v = VIEWS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'claim';
+  let v = VIEWS.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'claim';
+  if (v==='admin' && !S.me.role) v = 'claim';
   VIEWS.forEach(x => $('#v-'+x).hidden = x!==v);
   $$('.tabbar a').forEach(a => { if (a.dataset.tab===v) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
   if (v==='mine') { confirmNo = null; renderMine(); }
   renderBadges();
   if (v==='budget') renderBudget();
+  if (v==='admin') loadAdmin();
+  $('#deadline').hidden = v==='admin';
   window.scrollTo({top:0});
 }
 window.addEventListener('hashchange', route);
@@ -1070,11 +1292,36 @@ window.addEventListener('hashchange', route);
 /* ===== 시작: 로그인이 남아 있으면 바로 입장 ===== */
 (async function start(){
   const t = getToken();
-  if (t) { try { const r = await api('me', { token: t }); return enter(r.state); } catch(e) { store.del('token'); } }
+  if (t) {
+    const cached = store.get('state');
+    if (cached && cached.me) {
+      enter(cached);                       // 기억해 둔 화면을 바로 보여주고
+      api('me', { token: t }).then(r => applyState(r.state)).catch(x => handleAuthError(x));   // 뒤에서 최신으로
+      return;
+    }
+    try { const r = await api('me', { token: t }); return enter(r.state); } catch(e) { store.del('token'); }
+  }
   const pass = store.get('pass');
+  const cachedNames = store.get('names');
+  if (pass && cachedNames && cachedNames.length) {
+    NAMES = cachedNames; gateStep('B');    // 이름 목록을 바로 보여주고
+    loadNames(pass).catch(() => { store.del('pass'); gateStep('A'); });   // 뒤에서 최신으로
+    return;
+  }
   if (pass) { try { await loadNames(pass); return gateStep('B'); } catch(e) { store.del('pass'); } }
   gateStep('A');
 })();
+/* 서버에서 받은 최신 데이터로 바꾸기 (작성 중인 청구 내용은 그대로) */
+function applyState(st){
+  if (!st || !S) return;
+  const roleChanged = (st.me.role||'') !== (S.me.role||'');
+  S = st; saveState();
+  if (roleChanged) { $('#tabAdmin').hidden = !S.me.role; $('#tabIn').classList.toggle('five', !!S.me.role); }
+  $('#halfLabel').textContent = S.halfLabel + ' 예산에서 차감돼요.';
+  renderDeadline(); renderRules(); renderUnits(); renderBadges();
+  const v = location.hash.slice(1);
+  if (v==='mine') renderMine(); if (v==='budget') renderBudget();
+}
 
 
 /* =====================================================================
@@ -1104,6 +1351,7 @@ function demoApi(action, p){
       return { token, state: demoState(D, n) };
     }
     if (action==='me') return { state: demoState(D, authed()) };
+    if (['admin','photo','setStatus','paid','undoPaid'].includes(action)) return demoAdmin(D, action, p, authed(), fail);
     if (action==='logout') { delete D.tokens[p.token]; return {}; }
     if (action==='cancel') {
       const n = authed(), c = D.claims.find(x => x.no===p.no && x.name===n);
@@ -1125,7 +1373,8 @@ function demoApi(action, p){
       if (lines.length > 1 && !item.once) fail('이 항목은 결제 1건씩 청구해요.');
       const paid = lines.reduce((s,l) => s + l.amount, 0), amount = Math.min(paid, limit);
       const place = lines.length > 1 ? lines.map(l => `${l.place} ${l.amount.toLocaleString('ko-KR')}원`).join(' / ') : lines[0].place;
-      D.claims.unshift({ no, name:n, unit:c.unit, item:c.item, date:c.date, place, lines, memo:c.memo, paid, amount, heads:c.heads||undefined, status:'접수', fixOf:c.fixOf||undefined });
+      D.claims.unshift({ no, name:n, unit:c.unit, item:c.item, date:c.date, place, lines, memo:c.memo, paid, amount, heads:c.heads||undefined, status:'접수', fixOf:c.fixOf||undefined, submitted: ymd(NOW)+' '+pad(NOW.getHours())+':'+pad(NOW.getMinutes()), nr: f.receipts.length, ng: f.group?1:0 });
+      D.accts[n] = { bank: p.bank, acct: p.acct };
       fixPhotos[no] = { receipts: f.receipts.slice(), group: f.group };
       return { no, amount, state: demoState(D, n) };
     }
@@ -1145,7 +1394,7 @@ function demoState(D, name){
   const mine = D.claims.filter(c => c.name===name && c.status!=='취소').map(c => ({ ...c, resub: (D.claims.find(x => x.fixOf===c.no && x.status!=='취소')||{}).no }));
   const h = halfKey(NOW);
   return {
-    me: { name, units },
+    me: { name, units, role: m.role || '' },
     items: D.items.filter(i => types.includes(i.type)),
     used, count, claims: mine,
     halfLabel: h.endsWith('H1') ? `${h.slice(0,4)} 상반기 (12~5월)` : `${h.slice(0,4)} 하반기 (6~11월)`,
@@ -1155,11 +1404,60 @@ function demoState(D, name){
     deadline: { day: 5, hour: 18 }
   };
 }
+/* 시안용 회계 모드 서버 */
+function demoAdmin(D, action, p, n, fail){
+  const me = D.members.find(m => m.name===n);
+  if (!me.role) fail('정산 권한이 없어요.', 'ROLE');
+  const isPay = me.role==='회계';
+  const today = ymd(NOW), stamp = () => `${NOW.getMonth()+1}/${NOW.getDate()} ${pad(NOW.getHours())}:${pad(NOW.getMinutes())}`;
+  const card = c => ({ ...c, own: Math.max(0, (c.paid||0)-(c.amount||0)), heads: c.heads||0,
+    submitted: c.submitted ? c.submitted.slice(5).replace('-','/') : '', submittedYmd: (c.submitted||'').slice(0,10),
+    receipts: Array.from({length: c.nr ?? 1}, (_,k) => `demo|${c.no}|${k}|${c.place}|${c.paid}`), group: Array.from({length: c.ng ?? (c.heads?1:0)}, () => `demo|${c.no}|g|${c.heads}`),
+    fixOf: c.fixOf||'', resub: (D.claims.find(x => x.fixOf===c.no && x.status!=='취소')||{}).no||'', lines: c.lines||[], by: c.by||'', at: c.at||'', payDate: c.payDate||'' });
+  const st = () => {
+    const all = D.claims;
+    const toCheck = all.filter(c => c.status==='접수').map(card).sort((x,y) => (x.submittedYmd+x.submitted).localeCompare(y.submittedYmd+y.submitted));
+    const held = all.filter(c => c.status==='보류' && !all.some(x => x.fixOf===c.no && x.status!=='취소')).map(card);
+    const g = {};
+    all.filter(c => c.status==='확인').forEach(c => { const x = g[c.name] || (g[c.name] = { name:c.name, total:0, nos:[], claims:[], ...(isPay ? (D.accts[c.name]||{}) : {}) }); x.total += c.amount; x.nos.push(c.no); x.claims.push(card(c)); });
+    const toPay = Object.values(g);
+    const history = all.filter(c => c.status==='입금완료').map(card).sort((a,b) => b.payDate.localeCompare(a.payDate));
+    const ym = today.slice(0,7), sum = a => a.reduce((s,c) => s+c.amount, 0);
+    return { role: me.role, isPay, today, summary: { check:{ n:toCheck.length, sum:sum(toCheck) }, pay:{ n:toPay.length, sum:toPay.reduce((s,x)=>s+x.total,0) }, held: held.length,
+      month: sum(all.filter(c => ['접수','확인','입금완료'].includes(c.status) && c.date.slice(0,7)===ym)) }, toCheck, toPay, held, history };
+  };
+  if (action==='admin') return { admin: st() };
+  if (action==='photo') return { data: demoPhoto(p.id) };
+  if (!isPay) fail('보기 전용 권한이에요. 처리는 회계가 해요.', 'ROLE');
+  if (action==='setStatus') {
+    const c = D.claims.find(x => x.no===p.no);
+    if (!c || c.status!==p.expect) fail('그사이 다른 사람이 처리했어요. 최신 내용으로 바꿨어요.', 'STALE');
+    c.status = p.status; c.reason = p.status==='보류' ? p.reason : ''; c.by = n; c.at = stamp();
+  }
+  if (action==='paid') {
+    const cs = D.claims.filter(x => p.nos.includes(x.no));
+    if (cs.some(c => c.status!=='확인')) fail('그사이 다른 사람이 처리했어요. 최신 내용으로 바꿨어요.', 'STALE');
+    cs.forEach(c => { c.status = '입금완료'; c.payDate = today; c.by = n; c.at = stamp(); });
+  }
+  if (action==='undoPaid') {
+    D.claims.filter(x => p.nos.includes(x.no) && x.status==='입금완료' && x.payDate===today).forEach(c => { c.status = '확인'; c.payDate = ''; c.by = n + '(되돌림)'; });
+  }
+  return { admin: st() };
+}
+/* 시안용 가짜 영수증·단체사진 그림 */
+function demoPhoto(id){
+  const [, no, k, a, b] = id.split('|');
+  const svg = k==='g'
+    ? `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450"><rect width="600" height="450" fill="#cfe3d4"/>${Array.from({length: Math.min(+a||6, 15)}, (_,i) => `<g transform="translate(${60+(i%5)*110} ${120+Math.floor(i/5)*110})"><circle r="26" fill="#f2c9a5"/><rect x="-30" y="28" width="60" height="50" rx="20" fill="#5a7d9a"/></g>`).join('')}<text x="300" y="440" font-size="20" text-anchor="middle" fill="#334">단체사진 예시 · ${a}명 · ${no}</text></svg>`
+    : `<svg xmlns="http://www.w3.org/2000/svg" width="420" height="640" viewBox="0 0 420 640"><rect width="420" height="640" fill="#fff"/><text x="210" y="60" font-size="26" text-anchor="middle" font-weight="700">${(a||'').split(' ')[0]}</text><text x="210" y="92" font-size="15" text-anchor="middle" fill="#555">신용카드 매출전표 (예시)</text>${Array.from({length:6},(_,i)=>`<rect x="40" y="${140+i*44}" width="${160+((i*37)%120)}" height="14" fill="#ddd"/><rect x="300" y="${140+i*44}" width="80" height="14" fill="#ddd"/>`).join('')}<line x1="40" y1="440" x2="380" y2="440" stroke="#333" stroke-dasharray="6 4"/><text x="40" y="490" font-size="22" font-weight="700">합계</text><text x="380" y="490" font-size="24" font-weight="700" text-anchor="end">${Number(b||0).toLocaleString('ko-KR')}원</text><text x="40" y="560" font-size="14" fill="#777">승인번호 ****${String(no).slice(-4)} · 영수증 ${+k+1}</text></svg>`;
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
 function demoSeed(){
   const K = ['셀','또래','팀'];
   return {
     pass: '1234',
-    pins: { '장도현':'0000', '박서윤':'1111', '김하늘':'2222', '강민재':'3333' }, fails: {}, tokens: {},
+    pins: { '장도현':'0000', '박서윤':'1111', '김하늘':'2222', '강민재':'3333', '서다은':'7777', '신지호':'8888' }, fails: {}, tokens: {},
+    accts: { '장도현':{bank:'카카오뱅크',acct:'3333012345678'}, '강민재':{bank:'국민',acct:'94360200112233'}, '박서윤':{bank:'토스뱅크',acct:'100012345678'}, '윤서아':{bank:'신한',acct:'110456789012'}, '정하은':{bank:'우리',acct:'1002345678901'} },
     units: [
       {id:'가나셀',type:'셀',size:9},{id:'다라셀',type:'셀',size:11},{id:'마바셀',type:'셀',size:8},{id:'사아셀',type:'셀',size:12},{id:'자차셀',type:'셀',size:7},
       {id:'96또래',type:'또래',size:14},{id:'98또래',type:'또래',size:18},{id:'00또래',type:'또래',size:16},{id:'02또래',type:'또래',size:11},
@@ -1171,8 +1469,9 @@ function demoSeed(){
       {name:'박서윤',units:[['마바셀','셀리더'],['98또래','또래장']]},{name:'최도윤',units:[['사아셀','셀리더']]},
       {name:'정하은',units:[['자차셀','셀리더']]},{name:'강민재',units:[['예배팀','팀장']]},
       {name:'윤서아',units:[['새가족팀','팀장'],['00또래','또래장']]},{name:'장도현',units:[['미디어팀','팀장']]},
-      {name:'임채원',units:[['찬양팀','팀장']]},{name:'한유진',units:[['임원단','회장']]},
-      {name:'신지호',units:[['임원단','총무'],['96또래','또래장']]},{name:'조예린',units:[['02또래','또래장']]}
+      {name:'임채원',units:[['찬양팀','팀장']]},{name:'한유진',units:[['임원단','회장']],role:'회계'},
+      {name:'신지호',units:[['임원단','총무'],['96또래','또래장']],role:'열람'},{name:'조예린',units:[['02또래','또래장']]},
+      {name:'서다은',units:[['임원단','회계']],role:'회계'}
     ],
     items: [
       {id:'셀 교제비',type:'셀',mode:'pool',amount:80000,basis:'셀당',once:true,photo:true,heads:true,pre:false,uses:'식사, 간식'},
@@ -1185,9 +1484,11 @@ function demoSeed(){
       {no:'2610-0004',name:'김하늘',unit:'가나셀',item:'셀 교제비',date:'2026-10-18',place:'한솥도시락 신촌점',paid:72000,amount:72000,heads:8,status:'입금완료',payDate:'2026-10-25'},
       {no:'2610-0007',name:'장도현',unit:'미디어팀',item:'팀 사역비',date:'2026-10-26',place:'다이소 홍대점',paid:38500,amount:38500,status:'입금완료',payDate:'2026-11-01'},
       {no:'2611-0006',name:'박서윤',unit:'98또래',item:'또래 식탁교제비',date:'2026-11-02',place:'명랑핫도그',paid:150000,amount:150000,heads:15,memo:'11월 또래모임',status:'보류',reason:'단체사진 속 인원은 14명인데 15명으로 입력됐어요. 인원을 확인해서 다시 청구해주세요.'},
-      {no:'2611-0008',name:'장도현',unit:'미디어팀',item:'팀 사역비',date:'2026-11-05',place:'쿠팡 (케이블)',paid:24000,amount:24000,status:'확인'},
-      {no:'2611-0011',name:'강민재',unit:'예배팀',item:'팀 교제비',date:'2026-11-08',place:'바르다김선생',paid:130000,amount:130000,heads:13,status:'접수'},
-      {no:'2611-0012',name:'장도현',unit:'미디어팀',item:'팀 사역비',date:'2026-11-09',place:'알파문구',paid:12000,amount:12000,status:'접수'}
+      {no:'2611-0008',name:'장도현',unit:'미디어팀',item:'팀 사역비',date:'2026-11-05',place:'쿠팡 (케이블)',paid:24000,amount:24000,status:'확인',submitted:'2026-11-05 10:02',by:'서다은',at:'11/6 21:10'},
+      {no:'2611-0009',name:'정하은',unit:'자차셀',item:'셀 교제비',date:'2026-11-07',place:'도토리식당',paid:64000,amount:64000,heads:7,status:'확인',submitted:'2026-11-07 22:15',by:'서다은',at:'11/8 09:30'},
+      {no:'2611-0011',name:'강민재',unit:'예배팀',item:'팀 교제비',date:'2026-11-08',place:'바르다김선생 82,000원 / 메가커피 48,000원',lines:[{place:'바르다김선생',amount:82000},{place:'메가커피',amount:48000}],paid:130000,amount:130000,heads:13,status:'접수',submitted:'2026-11-08 22:40',nr:2,ng:1},
+      {no:'2611-0012',name:'장도현',unit:'미디어팀',item:'팀 사역비',date:'2026-11-09',place:'알파문구',paid:12000,amount:12000,status:'접수',submitted:'2026-11-09 13:31',nr:1,ng:0},
+      {no:'2611-0014',name:'윤서아',unit:'새가족팀',item:'팀 사역비',date:'2026-10-20',place:'교보문고 (새가족 선물)',paid:108000,amount:100000,status:'접수',submitted:'2026-11-11 08:12',nr:1,ng:0}
     ],
     rules: [
       ['결제 수단','예산은 카드(신용·체크)로만 결제해주세요. 현금 결제는 청구할 수 없어요.'],
@@ -1234,3 +1535,6 @@ function demoSeed(){
 }
 
 </script>
+
+</body>
+</html>
